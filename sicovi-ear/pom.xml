@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.pasantia</groupId>
+		<artifactId>sicovi</artifactId>
+		<version>1.0</version>
+	</parent>
+	<artifactId>sicovi-ear</artifactId>
+	<packaging>ear</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.pasantia</groupId>
+			<artifactId>sicovi-web</artifactId>
+			<version>1.0</version>
+			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>com.pasantia</groupId>
+			<artifactId>sicovi-ejb</artifactId>
+			<version>1.0</version>
+			<type>jar</type>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>sicovi</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>2.8</version>
+				<configuration>
+					<applicationName>sicovi</applicationName>
+					<displayName>sicovi</displayName>
+					<modules>
+						<webModule>
+							<artifactId>sicovi-web</artifactId>
+							<groupId>com.pasantia</groupId>
+							<contextRoot>/sicovi</contextRoot>
+						</webModule>
+					</modules>
+					<generateApplicationXml>true</generateApplicationXml>
+					<!-- The following setting builds the EAR file in a format suitable 
+						for Glassfish deployment. With this we don't have to copy the libs into Glassfish's 
+						appserver lib directory -->
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>
